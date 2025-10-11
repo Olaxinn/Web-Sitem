@@ -1,0 +1,400 @@
+/* ===== Genel ===== */
+:root {
+  --bg: #000;
+  --text: wheat;
+  --muted: #ddd;
+  --card: #111;
+  --accent1: lime;
+  --accent2: lime;
+  --glow: lime;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; padding: 0; }
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 16px;
+  color: var(--text);
+  background: linear-gradient(135deg, #000 0%, #000000 50%, #050505 100%);
+  background-size: 400% 400%;
+  animation: bgShift 20s ease infinite;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Arka plan hareketi */
+@keyframes bgShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Smooth scroll */
+html { scroll-behavior: smooth; }
+
+
+
+/* ===== Ana içerik ===== */
+.main-content {
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.card {
+  background: rgba(0, 0, 0, 0.867);
+  border: 1px solid red; 
+  border-radius: 12px;
+  padding: 30px;
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card h1 {
+  color: lime;
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+/* ===== Proje Başlıkları ===== */
+.project {
+  margin-bottom: 25px;
+  border-bottom: 1px solid lime;
+  padding-bottom: 15px;
+}
+
+.project-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+  position: relative;
+}
+
+.project-title::after {
+  content: "▼";
+  position: absolute;
+  right: 0;
+  font-size: 0.9rem;
+  color: #ffffff;
+  transition: transform 0.3s ease;
+}
+
+.project-title.open::after {
+  transform: rotate(440deg);
+  transform: transfrom 0.8s ease;
+}
+
+
+
+/* ===== Proje Detayları ===== */
+.project-details {
+  margin-top: 10px;
+  padding-left: 15px;
+  line-height: 1.6;
+  color: rgb(212, 206, 206);
+  border-left: 2px solid rgba(205, 212, 209, 0.3);
+  animation: slideDown 1s ;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+  
+}
+
+.project-details a {
+  display: inline-block;
+  margin-top: 12px;
+  text-decoration: none;
+  color: white;
+  transition: color 0.4s ease, text-shadow 0.3s ease;
+  transition: 0.4s;
+
+}
+
+.project-details a:hover {
+  color: white;
+  text-shadow: 0 0 10px white;
+  transition: 1s;
+  color: var(--accent1);
+  text-decoration: none;
+}
+@keyframes slideUp {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-10px); }
+}
+.project-details.hide {
+  animation: slideUp 0.4s forwards;
+}
+
+
+/* ===== Liste ===== */
+.project-details ul {
+  margin: 10px 0 0 20px;
+  padding: 0;
+}
+
+.project-details li {
+  list-style: decimal;
+  margin: 6px 0;
+  color: white;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+
+
+/* ===== Başlık Sallanma ===== */
+.shake {
+  animation: shakeAnim 0.8s ease;
+}
+@keyframes shakeAnim {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-3px); }
+  100% { transform: translateX(0); }
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  scrollbar-width: 8px;
+  
+}
+::-webkit-scrollbar-track {
+  background: lime;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgb(0, 20, 0), rgb(0, 0, 0));
+    border-radius: 10px;
+    transition: background 1s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, lime, darkgreen);
+}
+
+
+
+
+/* ===== Navbar ===== */
+
+/* ===== Navbar ===== */
+nav {
+  display: flex;
+  justify-content:space-around; /* logo solda, menü sağda */
+  align-items: center;
+  height: 60px; /* navbar yüksekliği küçültüldü */
+  animation: navGlow 4s infinite alternate;
+  transition: all 1s ease;
+  padding: 20px;
+  margin: 10px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: bold;
+}
+
+/* Menü linkleri */
+nav a, nav .menu a {
+  background: linear-gradient(90deg, var(--accent1, lime), var(--accent2, lime));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color:transparent;
+  letter-spacing: 1px;
+  position: relative;
+  transition: transform 0.5s ease, text-shadow 0.3s ease;
+}
+
+nav a:hover, nav .menu a:hover {
+  transform: scale(3) rotate(-1deg);
+}
+
+
+/* Logo sallanma animasyonu */
+@keyframes logoSwing {
+  0% { transform: rotate(-8deg); } /* hafif azaltıldı */
+  50% { transform: rotate(15deg); }
+  100% { transform: rotate(-8deg); }
+}
+
+/* Navbar Glow Animasyonu */
+
+a:hover {
+    text-decoration: underline;
+    transform: scale(1.05);
+}
+/* ===== RESPONSIVE TASARIM ===== */
+
+/* Tabletler ve küçük dizüstüler (max 1024px) */
+@media (max-width: 1024px) {
+  nav {
+    flex-direction: column;
+    height: auto;
+    padding: 10px 20px;
+    text-align: center;
+  }
+
+  nav a {
+    font-size: 1rem;
+    margin: 6px 0;
+    transform: none !important;
+  }
+
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .left, .right {
+    width: 100%;
+    padding: 20px;
+  }
+
+  img.photo {
+    width: 70%;
+  }
+
+  .badge-frame {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+  }
+
+  footer {
+    width: 90%;
+    border-radius: 30px;
+  }
+}
+
+/* Orta boy telefonlar (max 768px) */
+@media (max-width: 768px) {
+  body {
+    font-size: 15px;
+  }
+
+  nav {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  nav a {
+    font-size: 0.95rem;
+    margin: 4px 0;
+  }
+
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .left {
+    order: 1;
+    padding: 10px;
+  }
+
+  .right {
+    order: 2;
+    padding: 20px;
+    font-size: 0.95rem;
+  }
+
+  img.photo {
+    width: 90%;
+    height: auto;
+  }
+
+  .chip-group {
+    justify-content: center;
+  }
+
+  footer {
+    width: 95%;
+    padding: 16px 20px;
+    font-size: 0.9rem;
+  }
+
+  .badge-frame {
+    width: 90%;
+    height: 150px;
+    margin: 25px auto;
+  }
+}
+
+/* Küçük telefonlar (max 480px) */
+@media (max-width: 480px) {
+  nav {
+    margin: 8px;
+    border-radius: 15px;
+    padding: 10px;
+  }
+
+  nav a {
+    font-size: 0.85rem;
+    display: block;
+    margin: 4px 0;
+  }
+
+  .left, .right {
+    padding: 10px;
+  }
+
+  img.photo {
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  .right h1 {
+    font-size: 1.2rem;
+  }
+
+  .right h3, .right h4 {
+    font-size: 1rem;
+  }
+
+  li {
+    font-size: 0.9rem;
+  }
+
+  .chip {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  footer {
+    width: 90%;
+    border-radius: 20px;
+    font-size: 0.85rem;
+  }
+
+  .badge-frame {
+    width: 95%;
+    height: 120px;
+    margin: 20px auto;
+  }
+}
+
+/* Çok küçük cihazlar (max 360px) */
+@media (max-width: 360px) {
+  nav a {
+    font-size: 0.75rem;
+  }
+
+  footer {
+    font-size: 0.8rem;
+    padding: 12px 15px;
+  }
+
+  .chip {
+    font-size: 11px;
+    padding: 5px 8px;
+  }
+
+  .badge-frame {
+    height: 100px;
+  }
+}

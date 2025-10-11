@@ -1,0 +1,377 @@
+:root {
+  --bg: #000;
+  --text: rgb(167, 136, 225) ;
+  --muted: wheat;
+  --card: #111;
+  --accent1: lime;
+  --accent2: lime;
+  --glow: lime;
+}
+
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(135deg, #000 0%, #020202 50%, #050505 100%);
+  color: var(--text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-size: 400% 400%;
+  animation: bgShift 20s ease infinite;
+}
+
+/* ===== Ortala ve sütunlar ===== */
+.wrap { display: block; }
+.cols {
+  display: flex;
+  gap: 28px;
+  justify-content: center;
+  align-items: start;
+  height: calc(100vh - 92px);
+  padding: 0 18px 18px;
+}
+.col {
+  flex: 0 0 44%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+}
+
+/* ===== Kart ===== */
+.card {
+  width: 100%;
+  max-width: 720px;
+  background: var(--card);
+  border-radius: 12px;
+  padding: 22px;
+  margin-top: 30px;
+  box-shadow: 0 0 30px rgba(0,255,144,0.12);
+  border: 1px solid rgba(255,255,255,0.03);
+  max-height: 80vh;
+  overflow-y: auto;
+  transition: box-shadow .28s ease, transform .28s ease;
+  opacity: 0;
+  transform: translateY(18px);
+}
+.card.visible {
+  animation: cardIn .9s cubic-bezier(.2,.9,.3,1) forwards;
+}
+.card:hover {
+  box-shadow: 0 6px 60px rgba(0,255,144,0.25);
+  transform: translateY(-4px) scale(1.02) rotateX(2deg) rotateY(-2deg);
+}
+
+/* Başlıklar */
+.card h2, .card h3 {
+  margin: 0 0 10px 0;
+  position: relative;
+  color: rgb(220, 60, 60);
+}
+.card h2::after, .card h3::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent1), transparent);
+}
+
+/* Metin */
+.card p {
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0 0 14px 0;
+  text-align: justify;
+  animation: fadeIn 1.8s ease forwards;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(55px); }
+  to { opacity: 1; transform: translateY(5); }
+}
+.card ul { padding-left: 18px; margin: 8px 0 12px 0; }
+.card li { margin: 6px 0; color: var(--text); }
+
+/* Scrollbar */
+.card::-webkit-scrollbar { width: 8px; }
+.card::-webkit-scrollbar-track {
+  background: linear-gradient(180deg,#0b0b0b,#141414);
+  border-radius: 44px;
+}
+.card::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg,var(--accent1),var(--accent2));
+  border-radius: 12px;
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.4);
+  transition: background .18s ease, transform .18s ease;
+}
+.card::-webkit-scrollbar-thumb:hover {
+  transform: scale(1);
+  background: linear-gradient(180deg,#cffff2,#09a43a);
+}
+
+/* Firefox */
+.card { scrollbar-width: thin; scrollbar-color: var(--accent1) #111; }
+
+/* Açılış animasyonu */
+@keyframes cardIn {
+  0% { opacity: 0; transform: translateY(18px) scale(1); box-shadow: 0 0 8px rgba(0,255,144,0.06); }
+  60% { opacity: 1; transform: translateY(-555px) scale(1.01); box-shadow: 0 0 60px rgba(0,255,144,0.15); }
+  100% { opacity: 1; transform: translateY(0) scale(1); box-shadow: 0 0 30px rgba(0,255,144,0.1); }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .cols { flex-direction: column; gap: 16px; align-items: center; height: auto; padding-bottom: 28px; }
+  .col { flex: unset; width: 95%; }
+  body { overflow: auto; }
+  .card { max-height: 60vh; }
+}
+
+/* Linkler */
+a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: bold;
+    transition: color 0.3s ease, transform 0.2s ease, text-shadow 0.3s ease;
+}
+a:hover {
+    color: lightgreen;
+    text-decoration: underline;
+    transform: scale(2);
+}
+
+
+/* ===== Navbar ===== */
+nav {
+  display: flex;
+  justify-content:space-around; /* logo solda, menü sağda */
+  align-items: center;
+  height: 60px; /* navbar yüksekliği küçültüldü */
+  animation: navGlow 4s infinite alternate;
+  transition: all 1s ease;
+  padding: 20px;
+  margin: 10px;
+}
+
+/* Menü linkleri */
+nav a, nav .menu a {
+  background: linear-gradient(90deg, var(--accent1, lime), var(--accent2, lime));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color:transparent;
+  text-decoration: none;
+  font-weight:bolder;
+  letter-spacing: 1px;
+  position: relative;
+  transition: transform 0.5s ease, text-shadow 0.3s ease;
+  font-size: 0.9rem; /* font küçültüldü */
+
+}
+
+nav a:hover, nav .menu a:hover {
+  transform: scale(3) rotate(-1deg);
+}
+
+
+
+/* TryHackMe Badge */
+.badge-frame {
+  display: block;
+  margin-top: 15px;;
+  margin-left: 100px;
+  height: 101px;
+  width: 329px;
+  border: #09a43a;
+  border-radius: 16px;
+  box-shadow: 0 0 3px darkslateblue;
+  background: #151c2ba3;
+  transition: all 1s ease; /* Hover sonrası geri dönüş için */
+}
+@media (max-width: 900px) {
+  .badge-frame {
+    height: 220px;
+  }
+}
+.badge-frame:hover{
+  transition: all 04s ease;
+  cursor: pointer;
+  transition-duration: 0.8s;
+  transform: scale(1.09);
+  box-shadow: 0 0 3px darkgray;
+}
+/* ===== RESPONSIVE TASARIM ===== */
+
+/* Tabletler ve küçük dizüstüler (max 1024px) */
+@media (max-width: 1024px) {
+  nav {
+    flex-direction: column;
+    height: auto;
+    padding: 10px 20px;
+    text-align: center;
+  }
+
+  nav a {
+    font-size: 1rem;
+    margin: 6px 0;
+    transform: none !important;
+  }
+
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .left, .right {
+    width: 100%;
+    padding: 20px;
+  }
+
+  img.photo {
+    width: 70%;
+  }
+
+  .badge-frame {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+  }
+
+  footer {
+    width: 90%;
+    border-radius: 30px;
+  }
+}
+
+/* Orta boy telefonlar (max 768px) */
+@media (max-width: 768px) {
+  body {
+    font-size: 15px;
+  }
+
+  nav {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  nav a {
+    font-size: 0.95rem;
+    margin: 4px 0;
+  }
+
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .left {
+    order: 1;
+    padding: 10px;
+  }
+
+  .right {
+    order: 2;
+    padding: 20px;
+    font-size: 0.95rem;
+  }
+
+  img.photo {
+    width: 90%;
+    height: auto;
+  }
+
+  .chip-group {
+    justify-content: center;
+  }
+
+  footer {
+    width: 95%;
+    padding: 16px 20px;
+    font-size: 0.9rem;
+  }
+
+  .badge-frame {
+    width: 90%;
+    height: 150px;
+    margin: 25px auto;
+  }
+}
+
+/* Küçük telefonlar (max 480px) */
+@media (max-width: 480px) {
+  nav {
+    margin: 8px;
+    border-radius: 15px;
+    padding: 10px;
+  }
+
+  nav a {
+    font-size: 0.85rem;
+    display: block;
+    margin: 4px 0;
+  }
+
+  .left, .right {
+    padding: 10px;
+  }
+
+  img.photo {
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  .right h1 {
+    font-size: 1.2rem;
+  }
+
+  .right h3, .right h4 {
+    font-size: 1rem;
+  }
+
+  li {
+    font-size: 0.9rem;
+  }
+
+  .chip {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  footer {
+    width: 90%;
+    border-radius: 20px;
+    font-size: 0.85rem;
+  }
+
+  .badge-frame {
+    width: 95%;
+    height: 120px;
+    margin: 20px auto;
+  }
+}
+
+/* Çok küçük cihazlar (max 360px) */
+@media (max-width: 360px) {
+  nav a {
+    font-size: 0.75rem;
+  }
+
+  footer {
+    font-size: 0.8rem;
+    padding: 12px 15px;
+  }
+
+  .chip {
+    font-size: 11px;
+    padding: 5px 8px;
+  }
+
+  .badge-frame {
+    height: 100px;
+  }
+}
