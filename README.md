@@ -1,6 +1,5 @@
 <div align="center">
 
-  <img src="https://capsule-render.vercel.app/render?type=waving&color=gradient&height=250&section=header&text=Web-Sitem&fontSize=80&animation=fadeIn" width="100%" />
 
   <br />
 
